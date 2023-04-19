@@ -58,6 +58,20 @@ public class DBManager {
         }
         return rows > 0;
     }
+    public static boolean editUser(Users user) {
+        int rows = 0;
+        try {
+            PreparedStatement statement = connection.prepareStatement("UPDATE users SET full_name = ?, password = ? WHERE id = ?");
+            statement.setString(1,user.getFullName());
+            statement.setString(2,user.getPassword());
+            statement.setLong(3,user.getId());
+            rows = statement.executeUpdate();
+            statement.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rows > 0;
+    }
     public static ArrayList<News> getNews() {
         ArrayList<News> news = new ArrayList<>();
         try {
@@ -84,11 +98,10 @@ public class DBManager {
         int rows = 0;
         try{
             PreparedStatement statement = connection.prepareStatement("" +
-                    "UPDATE news SET post_date = NOW(), category_id = ?, title = ?, content = ? WHERE id = ?");
-            statement.setLong(1, news.getCategory_id().getId());
-            statement.setString(2,news.getTitle());
-            statement.setString(3,news.getContent());
-            statement.setLong(4,news.getId());
+                    "UPDATE news SET post_date = NOW(), title = ?, content = ? WHERE id = ?");
+            statement.setString(1,news.getTitle());
+            statement.setString(2,news.getContent());
+            statement.setLong(3,news.getId());
             rows = statement.executeUpdate();
             statement.close();
         } catch (Exception e) {
@@ -96,7 +109,19 @@ public class DBManager {
         }
         return rows > 0;
     }
-    public static boolean addNews(News news) {
+    public static boolean deleteNews(Long id) {
+        int rows = 0;
+        try{
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM news WHERE id = ?");
+            statement.setLong(1,id);
+            rows = statement.executeUpdate();
+            statement.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rows > 0;
+    }
+    public static boolean addNews(News news){
         int rows = 0;
         try{
             PreparedStatement statement = connection.prepareStatement("INSERT INTO news(post_date, category_id, title, content)" +
@@ -208,6 +233,51 @@ public class DBManager {
             e.printStackTrace();
         }
 
+
+        return comments;
+    }
+    public static boolean deleteComments(Long id) {
+        int rows = 0;
+        try {
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM comments WHERE id = ?");
+            statement.setLong(1,id);
+            rows= statement.executeUpdate();
+            statement.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rows > 0;
+    }
+    public static boolean editComments(Comments comments) {
+        int rows = 0;
+        try {
+            PreparedStatement statement = connection.prepareStatement("UPDATE comments SET post_date = NOW(), comment = ? WHERE id = ?");
+            statement.setString(1,comments.getComment());
+            statement.setLong(2,comments.getId());
+            rows = statement.executeUpdate();
+            statement.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rows > 0;
+    }
+    public static Comments getCommentById(Long id) {
+        Comments comments = null;
+        try{
+            PreparedStatement statement = connection.prepareStatement("SELECT c.id,c.comment,c.post_date,c.user_id,c.news_id,b.id,b.email,b.password,b.full_name,b.role_id FROM comments c INNER JOIN users b ON b.id = c.id WHERE c.id = ?");
+            statement.setLong(1,id);
+            ResultSet resultSet = statement.executeQuery();
+            if(resultSet.next()) {
+                comments = new Comments();
+                comments.setId(resultSet.getLong("id"));
+                comments.setComment(resultSet.getString("comment"));
+                comments.setPost_date(resultSet.getTimestamp("post_date"));
+                comments.setUsers_id(new Users());
+                comments.setNews_id(new News());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return comments;
     }
