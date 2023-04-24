@@ -31,11 +31,11 @@
                 <a type="button" class="btn btn-primary btn-sm ms-1 mt-3" data-bs-toggle="modal" data-bs-target="#editNews">
                     Edit news
                 </a>
-                <div class="modal fade" id="editNews" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="editNews" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Editing News</h5>
+                                <h5 class="modal-title" id="exampleModalLabel1">Editing News</h5>
                                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>

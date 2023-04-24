@@ -33,6 +33,7 @@ public class AddUserServlet extends HttpServlet {
                 user.setEmail(email);
                 user.setPassword(password);
                 user.setFullName(full_name);
+                user.setRole_id(2);
                 if(DBManager.addUser(user)) {
                     redirect = "/register?success";
                 }
