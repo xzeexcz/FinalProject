@@ -19,7 +19,6 @@ public class DBManager {
             e.printStackTrace();
         }
     }
-
     public static Users getUser(String email) {
         Users user = null;
         try{
@@ -42,7 +41,7 @@ public class DBManager {
         }
         return user;
     }
-    public static boolean addUser(Users user) {
+   public static boolean addUser(Users user) {
         int rows = 0;
         try{
             PreparedStatement statement = connection.prepareStatement("" +
