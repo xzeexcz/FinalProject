@@ -22,7 +22,7 @@ public class DBManager {
     public static Users getUser(String email) {
         Users user = null;
         try{
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE email = ?");
+            PreparedStatement statement = connection.prepareStatement("SELECT c.id, c.email, c.password, c.full_name, c.role_id, d.id, d.role  FROM users c INNER JOIN roles d ON c.role_id = d.id WHERE email = ?");
             statement.setString(1,email);
             ResultSet resultSet = statement.executeQuery();
             if(resultSet.next()) {
@@ -31,7 +31,7 @@ public class DBManager {
                         resultSet.getString("email"),
                         resultSet.getString("password"),
                         resultSet.getString("full_name"),
-                        resultSet.getInt("role_id")
+                        new Roles(resultSet.getInt("role_id"), resultSet.getString("d.role"))
                         );
             }
             statement.close();

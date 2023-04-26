@@ -23,7 +23,7 @@
                 Posted at <strong><%=ns.getPost_date()%></strong>
               </p>
                 <%
-                    if((currentUser!=null) && (currentUser.getRole_id()==1)) {
+                    if((currentUser!=null) && (currentUser.getRole_id().getId()==1)) {
                 %>
                 <a type="button" class="btn btn-danger btn-sm ms-1 mt-3" data-bs-toggle="modal" data-bs-target="#deleteNews">
                     Delete news

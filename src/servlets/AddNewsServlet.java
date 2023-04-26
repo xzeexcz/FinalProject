@@ -18,7 +18,7 @@ public class AddNewsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Users currentUser = (Users) req.getSession().getAttribute("CURRENT_USER");
-        if(currentUser.getRole_id()== 1) {
+        if(currentUser.getRole_id().getId()== 1) {
         req.getRequestDispatcher("/addNews.jsp").forward(req,resp);
         } else {
             resp.sendRedirect("/404.jsp");

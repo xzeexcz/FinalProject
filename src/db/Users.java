@@ -5,9 +5,9 @@ public class Users {
     private String email;
     private String password;
     private String fullName;
-    private int role_id;
+    private Roles role_id;
 
-    public Users(Long id, String email, String password, String fullName, int role_id) {
+    public Users(Long id, String email, String password, String fullName, Roles role_id) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -50,11 +50,11 @@ public class Users {
         this.fullName = fullName;
     }
 
-    public int getRole_id() {
+    public Roles getRole_id() {
         return role_id;
     }
 
-    public void setRole_id(int role_id) {
+    public void setRole_id(Roles role_id) {
         this.role_id = role_id;
     }
 }

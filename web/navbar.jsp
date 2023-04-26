@@ -31,7 +31,7 @@
                     </li>
                     <%
                         String redirect = "/404";
-                        if(currentUser.getRole_id()==1) {
+                        if(currentUser.getRole_id().getId()==1) {
                             redirect = "/addNews";
                     %>
                     <li class="nav-item">
